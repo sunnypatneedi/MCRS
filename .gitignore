@@ -1,0 +1,39 @@
+# IDE configuration files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# Windsurf specific (Potential - adjust if needed)
+.windsurf/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build output (If applicable later)
+build/
+dist/
+*.o
+*.pyc
+*.pyo
+__pycache__/
+
+# Local environment files
+.env
+*.local
+
+# Node modules (If JS tooling is used later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
