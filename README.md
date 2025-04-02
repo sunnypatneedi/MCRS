@@ -1,8 +1,9 @@
 # MCRS
 Medication Consensus Resolution Squad (MCRS) Data Specification.
-
+A mockup of a provider-facing application built with MCRS.
 ![image](https://github.com/user-attachments/assets/b2475522-72b0-4bc3-987b-d0ceb4d9de64)
 
+A mockup of a patient-facing application built with MCRS.
 ![image](https://github.com/user-attachments/assets/644f3e04-5906-4705-8d20-66ed2c8c11f2)
 
 ![image](https://github.com/user-attachments/assets/53b70fca-926e-4953-9f30-bef54c0d9361)
