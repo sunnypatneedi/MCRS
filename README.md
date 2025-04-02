@@ -69,5 +69,27 @@ A patient presents in an urgent care setting with an acute adverse reaction, nec
 How MCRS Helps:
 	•	Emergency Override: In critical situations (e.g., anaphylaxis or acute cardiac events), a caregiver can trigger an emergency override that updates the medication instructions immediately while logging the override for later review.
 	•	Rapid Notification: The override is broadcast in real time to all relevant caregivers to ensure that every member of the care team is aware of the change.
-	•	Post-Event Audit: Once the emergency subsides, the override is reviewed through the standard consensus process, ensuring that the change is reconciled with the patient’s overall medication history.
-![image](https://github.com/user-attachments/assets/375fcb5d-2d45-4104-914a-f0329f933d97)
+	•	Post-Event Audit: Once the emergency subsides, the override is reviewed through the standard consensus process, ensuring that the change is reviewed and reconciled appropriately.
+
+## Frequently Asked Questions (FAQ)
+
+**1. Why is the MCRS specification needed? How does it complement existing standards like FHIR or EHR reconciliation tools?**
+   - While FHIR provides robust data exchange standards and EHR tools handle internal reconciliation, MCRS specifically addresses the coordination challenge in multi-caregiver environments. It defines a structured consensus protocol with verification and conflict resolution rules to ensure medication changes proposed across different systems or organizations are consistent, transparent, and safe *before* they are finalized.
+
+**2. How does the MCRS specification ensure medication changes are synchronized and conflicts resolved?**
+   - The spec defines a state model (`PENDING`, `APPROVED`, `REJECTED`, `CONFLICT`, etc.) and mandates tracking changes via an `audit_log`. It outlines standard workflows for proposing changes, assigning verifiers, checking for consensus based on configurable rules (e.g., quorum, criticality), and escalating detected conflicts (e.g., simultaneous contradictory proposals) for arbitration. Interoperability is achieved through defined mappings to standard resources (like FHIR) and recommending standardized identifiers.
+
+**3. What consensus mechanisms does the MCRS specification define?**
+   - The specification proposes a role-based verification system. The exact rules (e.g., unanimous approval for critical medications, majority for non-critical) are intended to be configurable by the implementing system, but the spec provides the framework. It defines verifier statuses (`APPROVED`, `REJECTED`, `NEED_MORE_INFO`) and requires tracking these responses to determine if consensus is reached or if a conflict state exists.
+
+**4. How does the MCRS specification handle different medication terminologies?**
+   - To ensure accuracy and interoperability, the specification recommends using standardized medication identifiers (like RxNorm and ATC codes) in the `rxnorm_code` and `atc_code` fields, alongside the human-readable `medication_name`. This allows systems using different local terminologies to map to a common standard for comparison and verification.
+
+**5. What FHIR resources does the MCRS specification map to, and how are extensions handled?**
+   - The spec is designed for FHIR interoperability. Core MCRS concepts map naturally to FHIR resources like `MedicationRequest` (the proposed change), `Provenance` (audit trail), `Task` (workflow steps), and `CommunicationRequest` (notifications). The spec includes an `extensions` field and anticipates the need for specific FHIR Profiles (e.g., defining `x-mcrs-criticality` or `x-mcrs-state` extensions on FHIR resources) to capture MCRS-specific details not present in the base FHIR standards. A dedicated `mcrs-fhir-mappings.md` document details these relationships.
+
+**6. How does the MCRS specification support different user roles and permissions?**
+   - The spec includes `proposer` and `verifier` objects, each with `user_id` and `role` fields. While defining a basic set (e.g., physician, pharmacist, nurse), the specification is designed to be extensible, allowing implementing systems to define more granular roles (e.g., specialist, arbiter) and implement Role-Based Access Control (RBAC) to govern who can perform specific actions (propose, verify, override) based on role and context (like medication criticality).
+
+**7. How is the MCRS specification designed for integration with EHRs (e.g., via SMART on FHIR)?**
+   - The specification focuses on the data model (JSON Schema, Protobuf) and the consensus workflow logic. Integration into EHRs is envisioned via defined mappings (especially to FHIR) and standard protocols. SMART on FHIR is a natural fit, enabling secure, contextual launch of MCRS-aware applications within an EHR to allow users to interact with MCRs (propose, review, approve) directly within their existing workflow, leveraging OAuth2 for security.
