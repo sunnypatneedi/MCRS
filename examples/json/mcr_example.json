@@ -1,0 +1,53 @@
+{
+  "mcr_id": "mcr_12345",
+  "patient_id": "patient_67890",
+  "medication_name": "Warfarin",
+  "rxnorm_code": "855332", 
+  "atc_code": "B01AA03",
+  "current_dosage": "5 mg daily",
+  "proposed_dosage": "4 mg daily",
+  "instructions": "Reduce dosage due to high INR levels. Patient INR is 3.5.",
+  "criticality_level": "critical",
+  "state": "PENDING",
+  "proposer": {
+    "user_id": "doc_001",
+    "role": "physician"
+  },
+  "verifiers": [
+    {
+      "user_id": "pharm_007",
+      "role": "pharmacist",
+      "status": "PENDING",
+      "timestamp": null,
+      "notes": null
+    },
+    {
+      "user_id": "nurse_003",
+      "role": "nurse",
+      "status": "PENDING",
+      "timestamp": null,
+      "notes": null
+    }
+  ],
+  "timestamps": {
+    "created_at": "2025-04-01T20:00:00Z",
+    "updated_at": "2025-04-01T20:00:00Z",
+    "escalated_at": null,
+    "resolved_at": null
+  },
+  "audit_log": [
+    {
+      "action": "MCR Created",
+      "performed_by": "doc_001",
+      "timestamp": "2025-04-01T20:00:00Z",
+      "notes": "Initial proposal."
+    },
+    {
+      "action": "Verifiers Assigned",
+      "performed_by": "system",
+      "timestamp": "2025-04-01T20:00:10Z",
+      "notes": "Assigned pharm_007, nurse_003 based on policy."
+    }
+  ],
+  "extensions": null
+}

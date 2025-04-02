@@ -1,0 +1,13 @@
+{
+  "log_entry_id": "audit_98765",
+  "mcr_id": "mcr_12345",
+  "action": "Verifier Response",
+  "performed_by": "pharm_007",
+  "timestamp": "2025-04-01T21:30:00Z",
+  "details": {
+    "previous_state": "PENDING",
+    "new_state": "PENDING",
+    "verifier_status": "APPROVED",
+    "verifier_notes": "INR justifies reduction, concur with proposal."
+  }
+}

@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package mcrs;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+option java_package = "org.mcrs_spec.proto";
+option java_multiple_files = true;
+
+// Represents a Medication Change Request
+message MedicationChangeRequest {
+  // Unique identifier for the MCR (e.g., UUID).
+  string mcr_id = 1;
+  // Unique patient identifier.
+  string patient_id = 2;
+  // Plain text name of the medication.
+  string medication_name = 3;
+  // RxNorm code for the medication (Recommended).
+  optional string rxnorm_code = 4;
+  // ATC code for the medication (Optional).
+  optional string atc_code = 5;
+  // Dosage information before the proposed change.
+  optional string current_dosage = 6;
+  // Proposed new dosage information.
+  string proposed_dosage = 7;
+  // Rationale or instructions for the change.
+  string instructions = 8;
+  // Risk level of the medication change.
+  CriticalityLevel criticality_level = 9;
+  // Current state of the MCR.
+  MCRState state = 10;
+  // Information about the user proposing the change.
+  User proposer = 11;
+  // List of assigned verifiers and their responses.
+  repeated VerifierResponse verifiers = 12;
+  // Key timestamps.
+  Timestamps timestamps = 13;
+  // Chronological log of actions on the MCR.
+  repeated AuditLogEntry audit_log = 14;
+  // Placeholder for custom vendor or implementation-specific fields.
+  google.protobuf.Struct extensions = 15;
+}
+
+// Represents a user involved in the MCR process
+message User {
+  // ID of the user.
+  string user_id = 1;
+  // Role of the user (extensible).
+  string role = 2;
+}
+
+// Represents a verifier's response
+message VerifierResponse {
+  // ID of the verifier.
+  string user_id = 1;
+  // Role of the verifier.
+  string role = 2;
+  // Status of the verification.
+  VerifierStatus status = 3;
+  // Timestamp of the verifier response.
+  google.protobuf.Timestamp timestamp = 4;
+  // Optional comments from the verifier.
+  optional string notes = 5;
+}
+
+// Represents key timestamps in the MCR lifecycle
+message Timestamps {
+  google.protobuf.Timestamp created_at = 1;
+  google.protobuf.Timestamp updated_at = 2;
+  optional google.protobuf.Timestamp escalated_at = 3;
+  optional google.protobuf.Timestamp resolved_at = 4;
+}
+
+// Represents an entry in the audit log
+message AuditLogEntry {
+  // Description of the action performed.
+  string action = 1;
+  // User ID of the actor (or 'system').
+  string performed_by = 2;
+  // Timestamp of the action.
+  google.protobuf.Timestamp timestamp = 3;
+  // Additional context for the log entry.
+  optional string notes = 4;
+}
+
+// Enum for Criticality Level
+enum CriticalityLevel {
+  CRITICALITY_UNSPECIFIED = 0;
+  CRITICAL = 1;
+  SEMI_CRITICAL = 2;
+  NON_CRITICAL = 3;
+}
+
+// Enum for MCR State
+enum MCRState {
+  STATE_UNSPECIFIED = 0;
+  PENDING = 1;
+  APPROVED = 2;
+  REJECTED = 3;
+  CONFLICT = 4;
+  OVERRIDDEN = 5;
+}
+
+// Enum for Verifier Status
+enum VerifierStatus {
+  VERIFIER_STATUS_UNSPECIFIED = 0;
+  PENDING = 1;        // Assigned, awaiting response
+  APPROVED = 2;
+  REJECTED = 3;
+  NEED_MORE_INFO = 4;
+  TIMED_OUT = 5;
+}

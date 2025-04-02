@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MCRSExtensions",
+  "description": "Schema definitions for common MCRS extensions, particularly for FHIR mapping.",
+  "definitions": {
+    "Extension": {
+      "type": "object",
+      "properties": {
+        "url": { 
+          "type": "string", 
+          "format": "uri", 
+          "description": "URL identifying the extension definition (e.g., http://mcrs-spec.org/fhir/StructureDefinition/x-mcrs-criticality)."
+        },
+        "valueString": { "type": "string" },
+        "valueCode": { "type": "string" },
+        "valueBoolean": { "type": "boolean" },
+        "valueDateTime": { "type": "string", "format": "date-time" },
+        "valueReference": { 
+          "type": "object",
+          "properties": {
+            "reference": { "type": "string", "description": "e.g., Patient/123" },
+            "type": { "type": "string", "description": "e.g., Patient" },
+            "display": { "type": "string" }
+          }
+        }
+        // Add other value[x] types as needed based on FHIR extension types
+      },
+      "required": ["url"]
+    },
+    "FHIRMappingExtensions": {
+      "description": "Examples of how FHIR extensions might be represented within the 'extensions' object of an MCR, if not directly mapped via profiles.",
+      "type": "object",
+      "properties": {
+        "x-fhir-medicationrequest-id": {
+          "type": "string",
+          "description": "ID of the corresponding FHIR MedicationRequest resource."
+        },
+        "x-fhir-provenance-ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of IDs for related FHIR Provenance resources."
+        }
+      }
+    }
+  }
+}

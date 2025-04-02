@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MedicationChangeRequest",
+  "description": "Schema for the MCRS Medication Change Request object.",
+  "type": "object",
+  "properties": {
+    "mcr_id": {
+      "type": "string",
+      "description": "Unique identifier for the MCR (e.g., UUID).",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "patient_id": {
+      "type": "string",
+      "description": "Unique patient identifier."
+    },
+    "medication_name": {
+      "type": "string",
+      "description": "Plain text name of the medication."
+    },
+    "rxnorm_code": {
+      "type": ["string", "null"],
+      "description": "RxNorm code for the medication (Recommended)."
+    },
+    "atc_code": {
+      "type": ["string", "null"],
+      "description": "ATC code for the medication (Optional)."
+    },
+    "current_dosage": {
+      "type": ["string", "null"],
+      "description": "Dosage information before the proposed change."
+    },
+    "proposed_dosage": {
+      "type": "string",
+      "description": "Proposed new dosage information."
+    },
+    "instructions": {
+      "type": "string",
+      "description": "Rationale or instructions for the change.",
+      "minLength": 1
+    },
+    "criticality_level": {
+      "type": "string",
+      "enum": ["critical", "semi-critical", "non-critical"],
+      "description": "Risk level of the medication change."
+    },
+    "state": {
+      "type": "string",
+      "enum": ["PENDING", "APPROVED", "REJECTED", "CONFLICT", "OVERRIDDEN"],
+      "description": "Current state of the MCR."
+    },
+    "proposer": {
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string", "description": "ID of the proposing user." },
+        "role": { "type": "string", "description": "Role of the proposer (extensible)." }
+      },
+      "required": ["user_id", "role"]
+    },
+    "verifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user_id": { "type": "string", "description": "ID of the verifier." },
+          "role": { "type": "string", "description": "Role of the verifier." },
+          "status": {
+            "type": "string",
+            "enum": ["PENDING", "APPROVED", "REJECTED", "NEED_MORE_INFO", "TIMED_OUT"],
+            "description": "Status of the verification."
+          },
+          "timestamp": {
+            "type": ["string", "null"],
+            "format": "date-time",
+            "description": "Timestamp of the verifier response."
+          },
+          "notes": {
+            "type": ["string", "null"],
+            "description": "Optional comments from the verifier."
+          }
+        },
+        "required": ["user_id", "role", "status"]
+      },
+      "description": "List of assigned verifiers and their responses."
+    },
+    "timestamps": {
+      "type": "object",
+      "properties": {
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "escalated_at": { "type": ["string", "null"], "format": "date-time" },
+        "resolved_at": { "type": ["string", "null"], "format": "date-time" }
+      },
+      "required": ["created_at", "updated_at"]
+    },
+    "audit_log": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AuditLogEntry" 
+      },
+      "description": "Chronological log of actions on the MCR."
+    },
+    "extensions": {
+      "type": ["object", "null"],
+      "description": "Placeholder for custom vendor or implementation-specific fields.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "mcr_id",
+    "patient_id",
+    "medication_name",
+    "proposed_dosage",
+    "instructions",
+    "criticality_level",
+    "state",
+    "proposer",
+    "timestamps"
+  ],
+  "definitions": {
+    "AuditLogEntry": {
+      "type": "object",
+      "properties": {
+        "action": { "type": "string", "description": "Description of the action performed." },
+        "performed_by": { "type": "string", "description": "User ID of the actor (or 'system')." },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "notes": { "type": ["string", "null"], "description": "Additional context for the log entry." }
+      },
+      "required": ["action", "performed_by", "timestamp"]
+    }
+  }
+}
