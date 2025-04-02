@@ -46,6 +46,9 @@ This repository contains the open-source data specification for the Medication C
 **7. How is the MCRS specification designed for integration with EHRs (e.g., via SMART on FHIR)?**
    - The specification focuses on the data model (JSON Schema, Protobuf) and the consensus workflow logic. Integration into EHRs is envisioned via defined mappings (especially to FHIR) and standard protocols. SMART on FHIR is a natural fit, enabling secure, contextual launch of MCRS-aware applications within an EHR to allow users to interact with MCRs (propose, review, approve) directly within their existing workflow, leveraging OAuth2 for security.
 
+**8. How is the MCRS specification different from Care Everywhere?**
+   - Care Everywhere is a health information exchange platform allowing providers to view other organizations' patient records. Applications built on MCRS are a collaborative medication decision-making platform that enables active consensus-building around medication decisions. Care Everywhere helps providers see what others have done; MCRS aims to help providers collaboratively decide what to do next. Care Everywhere works optimally between Epic instances with more complex interfaces for non-Epic systems. MCRS is vendor-neutral by design, using FHIR standards to integrate equally with any EHR system. Care Everywhere solves information availability but not collaborative decision-making or establishing a single source of truth for medications. Organizations facing significant challenges with medication errors would find MCRS application's capabilities extend beyond what Care Everywhere provides. These systems can be complementary rather than competitive.
+
 ## Getting Started
 
 Refer to the documentation in the `/docs` directory for detailed information on the specification, data models, and workflows.
