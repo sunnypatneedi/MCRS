@@ -1,6 +1,7 @@
 # MCRS
 Medication Consensus Reconciliation System (MCRS) Data Specification.
-![image](https://github.com/user-attachments/assets/ed9a9763-905c-4ba6-ac78-125a0afa97ef)
+![image](https://github.com/user-attachments/assets/6ea4d18e-2f68-4999-a98f-9b6a68586a8e)
+
 
 ## Overview
 
