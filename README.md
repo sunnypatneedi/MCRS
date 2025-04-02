@@ -1,9 +1,9 @@
 # MCRS
-Medication Consensus Resolution Squad (MCRS) Data Specification.
+Medication Consensus Resolution System (MCRS) Data Specification.
 
 ## Overview
 
-This repository contains the open-source data specification for the Medication Consensus Resolution Squad (MCRS). The MCRS spec defines a standardized way to represent Medication Change Requests (MCRs) and their associated resolution workflows, particularly in multi-caregiver scenarios.
+This repository contains the open-source data specification for the Medication Consensus Resolution System (MCRS). The MCRS spec defines a standardized way to represent Medication Change Requests (MCRs) and their associated resolution workflows, particularly in multi-caregiver scenarios.
 
 ## Purpose
 
