@@ -1,13 +1,13 @@
 # MCRS
-Medication Consensus Resolution System (MCRS) Data Specification.
+Medication Consensus Reconciliation System (MCRS) Data Specification.
 
 ## Overview
 
-This repository contains the open-source data specification for the Medication Consensus Resolution System (MCRS). The MCRS spec defines a standardized way to represent Medication Change Requests (MCRs) and their associated resolution workflows, particularly in multi-caregiver scenarios.
+This repository contains the open-source data specification for the Medication Consensus Reconciliation System (MCRS). The MCRS spec defines a standardized way to represent Medication Change Requests (MCRs) and their associated Reconciliation workflows, particularly in multi-caregiver scenarios.
 
 ## Purpose
 
-*   **Standardize Data:** Provide a common format for MCRs and resolution processes.
+*   **Standardize Data:** Provide a common format for MCRs and Reconciliation processes.
 *   **Improve Interoperability:** Facilitate seamless data exchange between healthcare systems (EHRs, SMART on FHIR apps).
 *   **Enhance Safety:** Address conflicting medication instructions via a structured consensus workflow.
 *   **Support Compliance & Analytics:** Define schemas for audit logs and notifications.
@@ -44,7 +44,7 @@ Scenario:
 A patient receives personalized, precision care where treatment is continuously adjusted based on genomic profiles and real-time biomarker monitoring.
 How MCRS Helps:
 	•	Multidisciplinary Consensus: Multiple specialists (e.g., geneticists, oncologists, pharmacists) can propose and verify tailored medication adjustments.
-	•	Conflict Resolution: If different experts suggest varying regimens for a targeted therapy, MCRS triggers a consensus process, merging proposals or escalating the conflict until a single, optimized treatment plan is reached.
+	•	Conflict Reconciliation: If different experts suggest varying regimens for a targeted therapy, MCRS triggers a consensus process, merging proposals or escalating the conflict until a single, optimized treatment plan is reached.
 	•	Traceability: Detailed audit logs capture the rationale behind each change, ensuring that personalized treatments are both safe and accountable.
 ![image](https://github.com/user-attachments/assets/7c5dc32a-f599-4062-a07a-b1013f4372d7)
 
